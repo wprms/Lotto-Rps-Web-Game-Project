@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PlayGame</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+      .row{
+        padding-top: 80px;
+        padding-bottom: 99px;
+      }
+      #img1,#img2{
+        text-align: center;
+        height: 300px;
+        line-height: 300px;
+        font-size:50px;
+      }
+      #rps1,#rps2{
+        text-align: center;
+        font-size:30px;
+        color: rgb(83, 54, 54);
+        margin-bottom: 50px;
+      }
+      #result{
+        height: 255px;
+        text-align: center;
+        line-height: 255px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 80px;
+        color: rgb(83, 54, 54);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="./game.html">PlayGame</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarScroll"
+          aria-controls="navbarScroll"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul
+            class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll"
+            style="max-height: 100px"
+          >
+            <li class="nav-item ">
+              <a class="nav-link" href="./game.html">Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./lotto.html">Lotto</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="./rps.html">Rock-Paper-Scissors<span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <div class="navbar-brand" id="time">           
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+        <div class="container">
+        <div class="album py-5 bg-light">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  <div id="img1">
+                    <img src="./scissors.jpg">
+                  </div>
+                  <div id="rps1">Rock</div>
+                </div>
+            </div>
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+                      <div id="result" class="justify-content-between mt-2"> WIN </div>
+                      <div class="d-flex justify-content-between">
+                        <button
+                          id="rockButton"
+                          type="button"
+                          class="btn btn-md btn-outline-primary"
+                          style="width:33%; font-size:15px"
+                        >ROCK
+                        </button>
+                        <button
+                        id="paperButton"
+                        type="button"
+                        class="btn btn-lg btn-outline-primary"
+                        style="width:33%; font-size:15px"
+                      >PAPER
+                      </button>
+                      <button
+                      id="scissorsButton"
+                      type="button"
+                      class="btn btn-lg btn-outline-primary"
+                      style="width:33%; font-size:13px"
+                    >SCISSORS
+                    </button>
+                      </div>
+                      <div class="d-flex justify-content-between mt-2">
+                        <button
+                          id="reset"
+                          type="button"
+                          class="btn btn-lg btn-block btn-outline-primary"
+                          style= "font-size:15px"
+                        >RESET
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card mb-4 box-shadow">
+                  <div id="img2">
+                    <img src="./scissors.jpg">
+                  </div>
+                  <div id="rps2">Rock</div>
+                </div>
+              </div>
+          </div>          
+        </main>
+      <footer>
+        <div class="bg-dark py-2">
+          <div class="container text-center">
+            <p class="text-muted mb-0 py-2">
+              &copy; 2023 GlobalIn 5 jekeun jang.
+            </p>
+          </div>
+        </div>
+      </footer>
+      <script>
+          setInterval(function () {
+          var timer = new Date();
+          var h = timer.getHours();
+          var m = timer.getMinutes();
+          var s = timer.getSeconds();
+          $("#time").html(
+          "TIME " + String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0"))
+        }, 1000)
+        var rock = "<img src=./rock.jpg>"
+        var paper = "<img src=./paper.jpg>"
+        var scissors = "<img src=./scissors.jpg>"
+        var arrRpsp = [rock,paper,scissors]
+        var arrRps = ["ROCK","PAPER","SCISSORS"]
+        var interval1 = setInterval(function(){
+        var randomRps = Math.floor(Math.random()*3);
+        $("#img2").html(arrRpsp[randomRps])
+        $("#rps2").text(arrRps[randomRps]);
+        },50);
+        var interval2 = setInterval(function(){
+        var randomRps = Math.floor(Math.random()*3);
+        $("#img1").html(arrRpsp[randomRps])
+        $("#rps1").text(arrRps[randomRps]);
+        },50);
+          $("#rockButton").click(function(){
+            clearInterval(interval1);
+            clearInterval(interval2);
+            $("#img1").html(arrRpsp[0]);
+            $("#rps1").text(arrRps[0]);
+            if($("#rps2").text() == arrRps[0]){
+              $("#result").text("DRAW");
+            }else if($("#rps2").text() == arrRps[1]){
+              $("#result").text("LOSE");
+            }else{
+              $("#result").text("WIN");
+            }
+          });
+          $("#paperButton").click(function(){
+            clearInterval(interval1);
+            clearInterval(interval2);
+            $("#img1").html(arrRpsp[1]);
+            $("#rps1").text(arrRps[1]);
+            if($("#rps2").text() == arrRps[0]){
+              $("#result").text("WIN");
+            }else if($("#rps2").text() == arrRps[1]){
+              $("#result").text("DRAW");
+            }else{
+              $("#result").text("LOSE");
+            }
+          });
+          $("#scissorsButton").click(function(){
+            clearInterval(interval1);
+            clearInterval(interval2);
+            $("#img1").html(arrRpsp[2]);
+            $("#rps1").text(arrRps[2]);
+            if($("#rps2").text() == arrRps[0]){
+              $("#result").text("LOSE");
+            }else if($("#rps2").text() == arrRps[1]){
+              $("#result").text("WIN");
+            }else{
+              $("#result").text("DRAW");
+            }
+          });
+          $("#reset").click(function(){
+            interval1 = setInterval(function(){
+            randomRps = Math.floor(Math.random()*3);
+            $("#img2").html(arrRpsp[randomRps])
+            $("#rps2").text(arrRps[randomRps]);
+            },50);
+            interval2 = setInterval(function(){
+            randomRps = Math.floor(Math.random()*3);
+            $("#img1").html(arrRpsp[randomRps])
+            $("#rps1").text(arrRps[randomRps]);
+            },50);
+          }
+          )
+      </script>
+  </body>
+</html>
+
